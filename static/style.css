@@ -1,0 +1,394 @@
+:root {
+    --paper: #efe6d6;
+    --paper-deep: #e6d9c2;
+    --card: #faf6ec;
+    --ink: #23301f;
+    --ink-soft: #5a6152;
+    --ink-faint: #93927f;
+    --accent: #5b3a73;
+    --accent-soft: #8768a0;
+    --brass: #a9803f;
+    --line: #cabf9f;
+    --error: #a3392c;
+
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "Inter", -apple-system, sans-serif;
+    --font-mono: "IBM Plex Mono", monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--paper);
+    background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-position: center;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: clamp(1rem, 4vw, 3rem) 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.sheet {
+    width: 100%;
+    max-width: 760px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    box-shadow: 0 1px 0 var(--line), 0 18px 40px -30px rgba(35, 48, 31, 0.5);
+    padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+/* ---------- Masthead ---------- */
+
+.masthead {
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.9rem;
+}
+
+.eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brass);
+}
+
+.eyebrow--right {
+    color: var(--ink-faint);
+}
+
+h1 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.9rem, 5vw, 2.5rem);
+    letter-spacing: -0.01em;
+    color: var(--ink);
+}
+
+.lede {
+    margin-top: 0.6rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 46ch;
+}
+
+/* ---------- Workspace grid ---------- */
+
+.workspace {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+    align-items: start;
+}
+
+@media (max-width: 640px) {
+    .workspace {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---------- Diagram panel ---------- */
+
+.diagram-frame {
+    position: relative;
+    border: 1px solid var(--line);
+    background: repeating-linear-gradient(
+        transparent, transparent 27px, var(--line) 27px, var(--line) 28px
+    ), var(--paper-deep);
+    background-blend-mode: multiply;
+    aspect-ratio: 320 / 300;
+}
+
+#flower-preview {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.callout {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.callout--standard {
+    top: 10%;
+    right: 6%;
+    text-align: right;
+    border-top: 1px solid var(--ink-faint);
+    padding-top: 0.3rem;
+}
+
+.callout--fall {
+    bottom: 10%;
+    left: 6%;
+    border-top: 1px solid var(--ink-faint);
+    padding-top: 0.3rem;
+}
+
+.callout.is-active {
+    opacity: 1;
+}
+
+.callout:not(.is-active) {
+    opacity: 0.45;
+}
+
+.callout-label {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--accent);
+}
+
+.callout-sub {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+}
+
+.diagram-caption {
+    margin-top: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--ink-faint);
+    text-align: center;
+}
+
+/* ---------- Form ---------- */
+
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+    margin-bottom: 0.9rem;
+}
+
+.field label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.35rem;
+}
+
+.field label span {
+    font-family: var(--font-mono);
+    color: var(--ink-faint);
+    font-size: 0.7rem;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 0.6rem 0.7rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-bottom: 2px solid var(--ink);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--ink);
+}
+
+input[type="number"]:focus {
+    outline: none;
+    border-color: var(--accent);
+    border-bottom-color: var(--accent);
+    background: #fff;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    opacity: 0.4;
+}
+
+button {
+    width: 100%;
+    margin-top: 0.6rem;
+    padding: 0.8rem;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+button:hover:not(:disabled) {
+    background: var(--accent);
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+button:disabled {
+    background: var(--ink-faint);
+    cursor: not-allowed;
+}
+
+.error {
+    margin-top: 0.9rem;
+    padding: 0.6rem 0.8rem;
+    border-left: 3px solid var(--error);
+    background: #fff;
+    color: var(--error);
+    font-size: 0.85rem;
+}
+
+/* ---------- Result ---------- */
+
+.result {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--ink);
+}
+
+.result-head h2 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.7rem;
+    text-transform: capitalize;
+    color: var(--accent);
+    margin-top: 0.2rem;
+}
+
+.result-head p {
+    margin-top: 0.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+}
+
+.prob-list {
+    list-style: none;
+    margin-top: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.prob-list li {
+    display: grid;
+    grid-template-columns: 6.5rem 1fr 3rem;
+    align-items: center;
+    gap: 0.7rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+}
+
+.prob-list .bar-track {
+    height: 6px;
+    background: var(--paper-deep);
+    position: relative;
+    overflow: hidden;
+}
+
+.prob-list .bar-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--accent-soft);
+    transform-origin: left;
+}
+
+.prob-list li.is-winner .bar-fill {
+    background: var(--accent);
+}
+
+.prob-list li.is-winner span:first-child {
+    color: var(--accent);
+    font-weight: 500;
+}
+
+/* ---------- Reference strip ---------- */
+
+.reference-strip {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed var(--line);
+}
+
+.reference-title {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.9rem;
+}
+
+.reference-title span {
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.reference-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.reference-card {
+    border: 1px solid var(--line);
+    padding: 0.7rem 0.5rem 0.9rem;
+    text-align: center;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.reference-card svg {
+    width: 100%;
+    height: 90px;
+}
+
+.reference-card .ref-name {
+    display: block;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+}
+
+.reference-card.is-match {
+    border-color: var(--accent);
+    background: #fff;
+}
+
+.reference-card.is-match .ref-name {
+    color: var(--accent);
+}
+
+.hidden {
+    display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}

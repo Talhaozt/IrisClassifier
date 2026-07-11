@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iris Classifier — Specimen Identification</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="sheet">
+
+        <header class="masthead">
+            <h1>Iris Classifier</h1>
+            <p class="lede">Dört ölçüm gir, model çiçeğin türünü — setosa, versicolor ya da virginica — tahmin etsin. Diyagram yazdığın değerlere göre canlı olarak şekil değiştirir.</p>
+        </header>
+
+        <main class="workspace">
+
+            <section class="diagram-panel" aria-label="Canlı çiçek diyagramı">
+                <div class="diagram-frame">
+                    <svg id="flower-preview" viewBox="0 0 320 300" role="img" aria-labelledby="diagram-caption"></svg>
+
+                    <div class="callout callout--standard">
+                        <span class="callout-label">standards</span>
+                        <span class="callout-sub">petal L / W</span>
+                    </div>
+                    <div class="callout callout--fall">
+                        <span class="callout-label">falls</span>
+                        <span class="callout-sub">sepal L / W</span>
+                    </div>
+                </div>
+                <p id="diagram-caption" class="diagram-caption">Girdiğin ölçülere göre yeniden çizilir</p>
+            </section>
+
+            <section class="form-panel">
+                <form id="predict-form" novalidate>
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="sepal_length">Sepal length <span>cm</span></label>
+                            <input type="number" id="sepal_length" name="sepal_length" step="0.1" min="0" max="10" required placeholder="5.1">
+                        </div>
+                        <div class="field">
+                            <label for="sepal_width">Sepal width <span>cm</span></label>
+                            <input type="number" id="sepal_width" name="sepal_width" step="0.1" min="0" max="10" required placeholder="3.5">
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="petal_length">Petal length <span>cm</span></label>
+                            <input type="number" id="petal_length" name="petal_length" step="0.1" min="0" max="10" required placeholder="1.4">
+                        </div>
+                        <div class="field">
+                            <label for="petal_width">Petal width <span>cm</span></label>
+                            <input type="number" id="petal_width" name="petal_width" step="0.1" min="0" max="10" required placeholder="0.2">
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submit-btn">
+                        <span>Türü tahmin et</span>
+                    </button>
+                </form>
+
+                <p id="error" class="error hidden" role="alert"></p>
+            </section>
+
+        </main>
+
+        <section id="result" class="result hidden" aria-live="polite">
+            <div class="result-head">
+                <span class="eyebrow">Sonuç</span>
+                <h2 id="species-name"></h2>
+                <p id="confidence"></p>
+            </div>
+            <ul id="prob-list" class="prob-list"></ul>
+        </section>
+
+        <section class="reference-strip" aria-label="Referans türler">
+            <p class="reference-title">Referans türler <span>— ortalama ölçülere göre</span></p>
+            <div class="reference-grid" id="reference-grid"></div>
+        </section>
+
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
